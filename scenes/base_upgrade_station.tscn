@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4dvngwsbbej2"]
+
+[ext_resource type="Script" path="res://code/base_upgrade_station.gd" id="1_4an3b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4lj6i"]
+size = Vector2(64, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yyeey"]
+radius = 88.0
+
+[node name="base_upgrade_station" type="Node2D"]
+script = ExtResource("1_4an3b")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[node name="Polygon2D2" type="Polygon2D" parent="StaticBody2D"]
+color = Color(0, 1, 0.298039, 1)
+polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_4lj6i")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_yyeey")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

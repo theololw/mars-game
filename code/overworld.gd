@@ -13,6 +13,7 @@ func generate_single_rock():
 
 	var new_rock = rock_scene.instantiate()
 	new_rock.position = rock_position
+	new_rock.z_index = 0
 	add_child(new_rock)
 func generate_random_position():
 	var min_x = -10

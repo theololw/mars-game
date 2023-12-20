@@ -47,7 +47,6 @@ func selectionMode():
 		building = 1
 		selecting = 0
 		structure_select.visible = false
-	print(structureNumber)
 	structure_select.frame = structureNumber
 
 func structurePlacementMode(structureNumber):
@@ -57,6 +56,7 @@ func structurePlacementMode(structureNumber):
 	if structureNumber == 1:
 		structure = space_base_instance
 	
+		pass
 	structure.position = get_local_mouse_position().snapped(Vector2(32,32))
 	
 	add_child(structure)
@@ -64,7 +64,7 @@ func structurePlacementMode(structureNumber):
 	physicsBody = structure.get_node("StaticBody2D")
 	physicsBody.collision_layer = 0
 	
-	if Input.is_action_just_pressed("leftClick"):
+	if Input.is_action_just_pressed("leftClick") and structure.placeable == 1:
 		physicsBody.collision_layer = 1
 		building = 0
 		

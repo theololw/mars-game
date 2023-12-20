@@ -1,11 +1,46 @@
-[gd_scene format=3 uid="uid://m3h6cdmfks7a"]
+[gd_scene load_steps=4 format=3 uid="uid://benrnekypwxsg"]
+
+[ext_resource type="Script" path="res://code/space_base.gd" id="1_biq0n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1oav"]
+size = Vector2(256, 256)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_byl1v"]
+blend_mode = 3
 
 [node name="spaceBase" type="Node2D"]
+script = ExtResource("1_biq0n")
+
+[node name="area_checker" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="area_checker"]
+shape = SubResource("RectangleShape2D_c1oav")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-128, 128, 128, 128, 128, -64, 64, -128, -64, -128, -128, -64)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+color = Color(0, 1, 1, 1)
+polygon = PackedVector2Array(-56, 128, -56, 0, -64, 0, -64, 128)
+
+[node name="Polygon2D3" type="Polygon2D" parent="."]
+position = Vector2(128, 0)
+color = Color(0, 1, 1, 1)
+polygon = PackedVector2Array(-56, 128, -56, 0, -64, 0, -64, 128)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(-128, 128, -56, 128, -56, 0, 64, 0, 64, 128, 128, 128, 128, -64, 64, -128, -64, -128, -128, -64)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_byl1v")
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+color = Color(1, 0, 0, 1)
+
+[connection signal="body_entered" from="area_checker" to="." method="_on_area_checker_body_entered"]
+[connection signal="body_exited" from="area_checker" to="." method="_on_area_checker_body_exited"]
